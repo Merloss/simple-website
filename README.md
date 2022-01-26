@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9de3565e-2d56-4575-9144-b0b49aed8549/deploy-status)](https://app.netlify.com/sites/dazzling-swanson-8597b5/deploys)
+
 # Simple Website
 
 ## Build Setup
