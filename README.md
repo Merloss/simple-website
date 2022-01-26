@@ -1,4 +1,4 @@
-# nuxtproje
+# Simple Website
 
 ## Build Setup
 
