@@ -9,7 +9,7 @@ export default {
     getUtmLink() {
       try {
         const url = new URL(this.href)
-        url.searchParams.append('utm_source', 'erigg')
+        url.searchParams.append('utm_source', window.location.host)
         return url.href
       } catch (err) {
         return this.href
