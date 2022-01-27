@@ -42,7 +42,7 @@
         </div>
 
         <div>
-          <h1 class="md:text-5xl text-3xl flex mb-2 xyz-in" xyz="fade left-2">
+          <h1 class="md:text-5xl text-3xl flex my-2 xyz-in" xyz="fade left-2">
             Hello&nbsp;
             <icon
               name="wave"
@@ -94,7 +94,7 @@
     <Link
       href="https://github.com/Merloss/personal-website"
       class="
-        md:fixed md:right-2 md:bottom-0
+        sm:fixed sm:right-2 sm:bottom-0
         m-2
         place-self-end
         hover:underline
