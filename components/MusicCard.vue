@@ -113,14 +113,12 @@ export default {
           this.lanyard?.spotify?.album_art_url,
           this.lanyard?.spotify?.song,
           this.lanyard?.spotify?.artist,
-          this.lanyard?.spotify?.album
+          this.lanyard?.spotify?.album,
+          this.lanyard?.spotify?.track_id
         )
       }
 
-      return (
-        this.lanyard?.spotify?.album_art_url ||
-        JSON.parse(localStorage.songData)[0]
-      )
+      return JSON.parse(localStorage.songData)[0]
     },
     getTextColor() {
       return tinycolor(this.dominantColor).isDark()
@@ -129,13 +127,9 @@ export default {
     getStatus() {
       return {
         statusIndicator: this.lanyard?.discord_status || 'Offline',
-        song:
-          this.lanyard?.spotify?.song || JSON.parse(localStorage.songData)[1],
-        artist:
-          this.lanyard?.spotify?.artist.split(';')[0] ||
-          JSON.parse(localStorage.songData)[2],
-        album:
-          this.lanyard?.spotify?.album || JSON.parse(localStorage.songData)[3],
+        song: JSON.parse(localStorage.songData)[1],
+        artist: JSON.parse(localStorage.songData)[2],
+        album: JSON.parse(localStorage.songData)[3],
         albumurl: this.lanyard?.spotify?.album_art_url,
         trackId: this.lanyard?.spotify?.track_id,
       }
@@ -195,7 +189,9 @@ export default {
       this.dominantColor = color
     },
     songForward() {
-      return `https://open.spotify.com/track/${this.getStatus.trackId}`
+      return `https://open.spotify.com/track/${
+        JSON.parse(localStorage.songData)[4]
+      }`
     },
   },
 }
