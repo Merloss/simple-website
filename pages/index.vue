@@ -92,7 +92,7 @@
       </div>
     </div>
     <Link
-      href="https://github.com/Merloss/personal-website"
+      href="https://github.com/Merloss/simple-website"
       class="
         sm:fixed sm:right-2 sm:bottom-0
         m-2
