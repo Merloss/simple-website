@@ -10,7 +10,7 @@
       selection:bg-black/10
     "
   >
-    <Nuxt class="container mx-auto" />
+    <Nuxt class="container mx-auto justify-center sm:justify-start" />
     <navbar />
     <div class="bg-gray-400 dark:bg-gray-700 fixed bottom-0 w-full py-1" />
   </div>
