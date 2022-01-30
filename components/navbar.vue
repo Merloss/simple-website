@@ -11,6 +11,7 @@
       inset-x-0
       mx-auto
       flex-shrink-0
+      shadow-md
       md:backdrop-blur-xl
     "
   >
