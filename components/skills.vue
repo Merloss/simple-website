@@ -24,7 +24,7 @@
         flex
         font-semibold
         md:text-base
-        text-xs
+        text-sm
         content-center
         truncate
         xyz-in
