@@ -6,7 +6,8 @@
       :style="`background-color: ${dominantColor}`"
       class="
         rounded-lg
-        bg-[#54616e]
+        dark:bg-[#54616e]
+        bg-gray-400
         font-extralight
         w-6/12
         md:w-auto
@@ -118,7 +119,10 @@ export default {
         )
       }
 
-      return JSON.parse(localStorage.songData)[0]
+      return (
+        this.lanyard?.spotify?.album_art_url ||
+        JSON.parse(localStorage.songData)[0]
+      )
     },
     getTextColor() {
       return tinycolor(this.dominantColor).isDark()
@@ -127,9 +131,12 @@ export default {
     getStatus() {
       return {
         statusIndicator: this.lanyard?.discord_status || 'Offline',
-        song: JSON.parse(localStorage.songData)[1],
-        artist: JSON.parse(localStorage.songData)[2],
-        album: JSON.parse(localStorage.songData)[3],
+        song:
+          this.lanyard?.spotify?.song || JSON.parse(localStorage.songData)[1],
+        artist:
+          this.lanyard?.spotify?.artist || JSON.parse(localStorage.songData)[2],
+        album:
+          this.lanyard?.spotify?.album || JSON.parse(localStorage.songData)[3],
         albumurl: this.lanyard?.spotify?.album_art_url,
         trackId: this.lanyard?.spotify?.track_id,
       }
@@ -175,6 +182,8 @@ export default {
     setInterval(() => {
       this.time = new Date().getTime()
     }, 500)
+    if (!localStorage.songData)
+      localStorage.songData = JSON.stringify(this.songData)
   },
 
   methods: {
