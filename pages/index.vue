@@ -94,7 +94,7 @@
     <Link
       href="https://github.com/Merloss/simple-website"
       class="
-        sm:fixed sm:right-2 sm:bottom-0
+        xl:fixed xl:right-2 xl:bottom-0
         m-2
         place-self-end
         hover:underline
