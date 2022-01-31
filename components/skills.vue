@@ -33,10 +33,22 @@
       :key="technology"
     >
       <icon
-        class="md:h-6 md:w-6 h-4 w-4 mr-2 self-center flex-shrink-0"
+        class="
+          md:h-6 md:w-auto
+          xl:w-6
+          h-4
+          w-4
+          md:mr-0
+          xl:mr-2
+          mr-2
+          self-center
+          xl:flex-shrink-0
+        "
         :name="key"
       />
-      {{ technology }}
+      <span class="md:hidden xl:block self-center">
+        {{ technology }}
+      </span>
     </div>
   </XyzTransitionGroup>
 </template>
