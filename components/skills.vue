@@ -31,6 +31,8 @@
       "
       v-for="(technology, key) in technologies"
       :key="technology"
+      :title="technology"
+      
     >
       <icon
         class="
