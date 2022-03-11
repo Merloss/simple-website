@@ -1,8 +1,6 @@
 <template>
   <nav
     class="
-      dark:bg-gray-700
-      bg-gray-300
       md:w-full
       w-full
       p-3
@@ -11,9 +9,12 @@
       inset-x-0
       mx-auto
       flex-shrink-0
-      shadow-md
-      md:backdrop-blur-xl
+      backdrop-blur-xl
+      transition-colors
+      duration-200
+      md:backdrop-blur-0
     "
+    :class="scroll > 10 ? 'bg-[#040b1b50]' : 'bg-transparent'"
   >
     <div class="flex justify-between items-center container mx-auto">
       <NuxtLink to="/" class="text-2xl dark:text-gray-200">Kerim</NuxtLink>
@@ -25,7 +26,7 @@
           transition
           duration-150
           bg-gray-300
-          dark:bg-gray-600
+          dark:bg-gray-900
           text-gray-500
           rounded-md
           focus:ring-2 focus:ring-gray-400
@@ -46,11 +47,22 @@
 
 <script>
 export default {
+  data() {
+    return {
+      scroll: null,
+    }
+  },
   methods: {
     switchTheme() {
       this.$colorMode.preference =
         this.$colorMode.value === 'dark' ? 'light' : 'dark'
     },
+    updateScroll() {
+      this.scroll = window.scrollY
+    },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.updateScroll)
   },
 }
 </script>
