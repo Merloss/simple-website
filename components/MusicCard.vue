@@ -82,10 +82,18 @@
               </div>
 
               <div
-                class="w-full mx-auto rounded-md h-1 transition-all bg-white/40"
+                class="
+                  w-full
+                  mx-auto
+                  rounded-md
+                  h-1
+                  transition-all
+                  dark:bg-white/40
+                  bg-black/20
+                "
               >
                 <div
-                  class="h-1 rounded-md transition-all bg-white"
+                  class="h-1 rounded-md transition-all dark:bg-white bg-black"
                   :style="`width: ${progress}%`"
                 ></div>
               </div>
