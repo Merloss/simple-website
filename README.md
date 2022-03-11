@@ -4,7 +4,7 @@
 
 You can see live at [here](https://merloss.netlify.app)
 
-![preview](https://i.imgur.com/jQCViUH.png)
+![preview](https://i.imgur.com/yPERhM0.png)
 
 ## Run Locally
 
