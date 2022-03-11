@@ -11,6 +11,7 @@
       items-center
       text-center
       truncate
+      select-none
     "
     xyz="fade small stagger"
   >
@@ -18,7 +19,7 @@
       class="
         bg-gray-300
         hover:bg-gray-400
-        dark:bg-gray-700 dark:hover:bg-gray-600
+        dark:bg-[#040b1b] dark:hover:bg-gray-600
         rounded-md
         p-3
         flex
@@ -32,7 +33,6 @@
       v-for="(technology, key) in technologies"
       :key="technology"
       :title="technology"
-      
     >
       <icon
         class="
