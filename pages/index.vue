@@ -31,6 +31,8 @@
               left-1
               transition
               animate-pulse
+              hidden
+              md:block
             "
             :class="{
               'bg-[#3ba55d]': getStatus.statusIndicator === 'online',
@@ -82,7 +84,7 @@
         </div>
       </div>
       <div class="flex flex-col md:w-4/12 w-10/12">
-        <MusicCard class="hidden md:block" />
+        <MusicCard class="block" />
 
         <span class="mt-6 mb-2 md:text-3xl xyz-in" xyz="fade left-4">
           Also tried these technologies & apps</span
