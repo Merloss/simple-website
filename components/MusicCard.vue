@@ -1,33 +1,43 @@
 <template>
-  <skeleton class="w-[500px] h-48 rounded-md" v-if="getLoading" />
-
+  <skeleton
+    class="w-[500px] h-48 rounded-md hidden md:block"
+    v-if="getLoading"
+  />
   <div v-else class="z-0">
+    <div class="md:hidden flex my-2 items-center">
+      <icon name="spotifyGreen" class="text-[#3ba55d] h-6 w-6 md:hidden" />
+      <div class="text-xs">
+        <span class="font-semibold"> {{ getStatus.song }} </span
+        ><span class="font-thin">by</span>
+        <span>{{ getStatus.artist }}</span>
+      </div>
+    </div>
+
     <div
-      :style="`background-color: ${dominantColor}`"
       class="
         rounded-lg
-        dark:bg-[#54616e]
-        bg-gray-400
         font-extralight
-        w-6/12
         md:w-auto
         xyz-in
         justify-between
         text-xs
-        h-48
-        md:max-w-xl md:text-md
+        md:h-48 md:max-w-xl md:text-md
+        hidden
+        md:block
       "
       xyz="fade"
     >
       <template>
-        <div class="flex flex-col h-full px-4">
-          <div class="flex gap-2 w-full h-full items-center truncate">
-            <div class="flex-shrink-0">
-              <v-image
-                class="rounded-md h-24 md:h-32 md:w-32"
-                draggable="false"
-                :src="getImageUrl"
-              />
+        <div class="flex flex-col md:h-full pr-4">
+          <div class="flex gap-2 md:w-full items-center truncate">
+            <div class="h-full w-72 hidden md:block">
+              <div class="flex-shrink-0">
+                <v-image
+                  class="rounded-md h-full"
+                  draggable="false"
+                  :src="getImageUrl"
+                />
+              </div>
             </div>
 
             <div
@@ -41,35 +51,41 @@
                 truncate
                 overflow-hidden
               "
-              :class="getTextColor ? 'text-white' : 'text-black'"
             >
-              <div class="space-y-1 overflow-hidden">
-                <div class="truncate block">
+              <div
+                class="
+                  space-y-1
+                  overflow-hidden
+                  flex
+                  md:flex-col
+                  space-x-4
+                  my-2
+                  md:my-0 md:space-x-0
+                "
+              >
+                <div class="truncate">
                   <Link
                     :href="songForward()"
                     target="_blank"
                     v-tippy="{ content: 'Click to go song' }"
-                    class="font-medium hover:underline truncate"
+                    class="font-medium hover:underline md:truncate"
                     >{{ getStatus.song }}</Link
                   >
                 </div>
-
-                <span class="truncate block"
+                <span class="truncate"
                   ><span class="font-thin">by</span>
                   {{ getStatus.artist }}</span
                 >
-                <span class="block"
+                <span
                   ><span class="font-thin">on</span> {{ getStatus.album }}</span
                 >
               </div>
 
               <div
-                class="w-full mx-auto rounded-md h-1 transition-all"
-                :class="getTextColor ? 'bg-white/40' : 'bg-black/30'"
+                class="w-full mx-auto rounded-md h-1 transition-all bg-white/40"
               >
                 <div
-                  class="h-1 rounded-md transition-all"
-                  :class="getTextColor ? 'bg-white' : 'bg-black'"
+                  class="h-1 rounded-md transition-all bg-white"
                   :style="`width: ${progress}%`"
                 ></div>
               </div>
@@ -109,6 +125,7 @@ export default {
     getImageUrl() {
       if (this.lanyard?.spotify?.album_art_url) {
         this.songData = []
+        this.$store.commit('lanyard', this.dominantColor)
 
         this.songData.push(
           this.lanyard?.spotify?.album_art_url,
