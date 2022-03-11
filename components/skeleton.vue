@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-12 min-w-12 bg-gray-300 dark:bg-gray-500 overflow-hidden">
+  <div class="min-h-12 min-w-12 bg-gray-300 dark:bg-[#040b1b] overflow-hidden">
     <div
       class="
         bg-gradient-to-r
