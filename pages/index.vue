@@ -70,6 +70,8 @@
               <icon
                 :name="key"
                 class="
+                  transition
+                  duration-75
                   h-8
                   w-8
                   rounded-md
