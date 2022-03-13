@@ -4,7 +4,7 @@
       bg-gray-200
       dark:bg-[#070510] dark:text-white
       overflow-hidden
-      transition-all
+      transition
       duration-75
       dark:selection:bg-white/10
       selection:bg-black/10
