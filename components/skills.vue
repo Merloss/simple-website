@@ -17,9 +17,10 @@
   >
     <div
       class="
-        bg-gray-300
         hover:bg-gray-400
-        dark:bg-[#040b1b] dark:hover:bg-gray-600
+        transition
+        duration-75
+        dark:bg-transparent dark:hover:bg-white/10
         rounded-md
         p-3
         flex
