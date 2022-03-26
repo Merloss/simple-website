@@ -3,6 +3,8 @@
     class="w-[500px] h-48 rounded-md hidden md:block"
     v-if="getLoading"
   />
+  <div v-else-if="!getStatus.song" class="text-3xl" />
+
   <div v-else class="z-0">
     <div class="md:hidden flex my-2 items-center">
       <icon name="spotifyGreen" class="text-[#3ba55d] h-6 w-6 md:hidden" />
@@ -35,6 +37,7 @@
                 <v-image
                   class="rounded-md h-full"
                   draggable="false"
+                  :loading="getLoading"
                   :src="getImageUrl"
                 />
               </div>
@@ -116,7 +119,6 @@ export default {
     return {
       lanyard: {},
       dominantColor: '',
-      songData: [],
 
       rotate: {
         rotate: 360,
@@ -132,22 +134,10 @@ export default {
     },
     getImageUrl() {
       if (this.lanyard?.spotify?.album_art_url) {
-        this.songData = []
         this.$store.commit('lanyard', this.dominantColor)
-
-        this.songData.push(
-          this.lanyard?.spotify?.album_art_url,
-          this.lanyard?.spotify?.song,
-          this.lanyard?.spotify?.artist,
-          this.lanyard?.spotify?.album,
-          this.lanyard?.spotify?.track_id
-        )
       }
 
-      return (
-        this.lanyard?.spotify?.album_art_url ||
-        JSON.parse(localStorage.songData)[0]
-      )
+      return this.lanyard?.spotify?.album_art_url
     },
     getTextColor() {
       return tinycolor(this.dominantColor).isDark()
@@ -156,12 +146,9 @@ export default {
     getStatus() {
       return {
         statusIndicator: this.lanyard?.discord_status || 'Offline',
-        song:
-          this.lanyard?.spotify?.song || JSON.parse(localStorage.songData)[1],
-        artist:
-          this.lanyard?.spotify?.artist || JSON.parse(localStorage.songData)[2],
-        album:
-          this.lanyard?.spotify?.album || JSON.parse(localStorage.songData)[3],
+        song: this.lanyard?.spotify?.song,
+        artist: this.lanyard?.spotify?.artist,
+        album: this.lanyard?.spotify?.album,
         albumurl: this.lanyard?.spotify?.album_art_url,
         trackId: this.lanyard?.spotify?.track_id,
       }
@@ -189,9 +176,6 @@ export default {
           return this.getColor()
       },
     },
-    songData() {
-      localStorage.songData = JSON.stringify(this.songData)
-    },
   },
 
   async mounted() {
@@ -207,8 +191,6 @@ export default {
     setInterval(() => {
       this.time = new Date().getTime()
     }, 500)
-    if (!localStorage.songData)
-      localStorage.songData = JSON.stringify(this.songData)
   },
 
   methods: {
@@ -223,9 +205,7 @@ export default {
       this.dominantColor = color
     },
     songForward() {
-      return `https://open.spotify.com/track/${
-        JSON.parse(localStorage.songData)[4]
-      }`
+      return `https://open.spotify.com/track/${this.getStatus.trackId}`
     },
   },
 }
