@@ -9,16 +9,7 @@ export default {
     htmlAttrs: {
       lang: 'en',
     },
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        hid: 'description',
-        name: 'description',
-        content:
-          '19 years old Turkish student, studying in Computer Programming and I try to learn new things every day in order to improve myself.',
-      },
-    ],
+
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   colorMode: {
@@ -46,6 +37,14 @@ export default {
   buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/svg', '@nuxtjs/color-mode'],
 
   modules: ['@nuxtjs/pwa'],
+  pwa: {
+    meta: {
+      title: 'Merloss',
+      description:
+        '19 years old Turkish student, studying in Computer Programming and I try to learn new things every day in order to improve myself.',
+      lang: 'en',
+    },
+  },
 
   tailwindcss: {
     viewer: false,

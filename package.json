@@ -1,5 +1,9 @@
 {
   "name": "simple-website",
+  "author": {
+    "name": "Kerim",
+    "email": "merl0ss@hotmail.com"
+  },
   "version": "1.0.0",
   "private": true,
   "scripts": {
