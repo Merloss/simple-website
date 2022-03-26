@@ -8,13 +8,14 @@
       :class="{ invisible: imageLoaded == false, [getClasses]: true }"
       @load="imageLoaded = true"
       :src="src"
+      :draggable="draggable"
     />
   </div>
 </template>
 <script>
 export default {
   inheritAttrs: false,
-  props: ['src', 'loading'],
+  props: ['src', 'loading', 'draggable'],
   data() {
     return {
       imageLoaded: false,
