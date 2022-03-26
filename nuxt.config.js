@@ -25,8 +25,6 @@ export default {
     classSuffix: '',
   },
 
-  css: [],
-
   plugins: [
     {
       src: '@/plugins/VueLanyard.js',
@@ -47,9 +45,7 @@ export default {
 
   buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/svg', '@nuxtjs/color-mode'],
 
-  modules: [],
-
-  build: {},
+  modules: ['@nuxtjs/pwa'],
 
   tailwindcss: {
     viewer: false,
