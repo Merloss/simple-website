@@ -42,6 +42,10 @@ export default {
       title: 'Merloss',
       description:
         '19 years old Turkish student, studying in Computer Programming and I try to learn new things every day in order to improve myself.',
+    },
+    manifest: {
+      name: 'Merloss',
+      short_name: 'Merloss',
       lang: 'en',
     },
   },
