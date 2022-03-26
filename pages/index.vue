@@ -17,11 +17,12 @@
           <v-image
             class="rounded-xl h-28 w-28 md:h-48 md:w-48 relative"
             :loading="getLoading"
-            :src="`https://cdn.discordapp.com/avatars/${getUserId}/${getAvatarUrl}.png?size=1024`"
+            :src="`https://cdn.discordapp.com/avatars/${getInfo.userId}/${getInfo.userAvatar}.png?size=1024`"
+            draggable="false"
             alt="avatar"
           />
           <div
-            v-tippy="{ content: getStatus.statusIndicator.toUpperCase() }"
+            v-tippy="{ content: getInfo.statusIndicator.toUpperCase() }"
             class="
               rounded-full
               h-3
@@ -35,10 +36,10 @@
               md:block
             "
             :class="{
-              'bg-[#3ba55d]': getStatus.statusIndicator === 'online',
-              'bg-[#faa81a]': getStatus.statusIndicator === 'idle',
-              'bg-[#ed4245]': getStatus.statusIndicator === 'dnd',
-              'bg-[#747f8d]': getStatus.statusIndicator === 'offline',
+              'bg-[#3ba55d]': getInfo.statusIndicator === 'online',
+              'bg-[#faa81a]': getInfo.statusIndicator === 'idle',
+              'bg-[#ed4245]': getInfo.statusIndicator === 'dnd',
+              'bg-[#747f8d]': getInfo.statusIndicator === 'offline',
             }"
           />
         </div>
@@ -92,7 +93,7 @@
           Also tried these technologies & apps</span
         >
 
-        <skills class="flex-shrink-0" />
+        <Skills class="flex-shrink-0" :spotifyStatus="spotifyLoading" />
       </div>
     </div>
     <Link
@@ -120,11 +121,7 @@ export default {
   data() {
     return {
       lanyard: {},
-      rotate: {
-        rotate: 360,
-        backgroundColor: ['#2f495e', '#00c58e'],
-        duration: 3000,
-      },
+
       socials: {
         github: 'https://github.com/merloss',
         spotify: 'https://open.spotify.com/user/02q2yz8zr18lpb749ubxvphty',
@@ -139,18 +136,15 @@ export default {
     getLoading() {
       return Object.keys(this.lanyard).length === 0
     },
-    getAvatarUrl() {
-      return this.lanyard?.discord_user?.avatar || ''
+    spotifyLoading() {
+      return this.lanyard?.spotify === null
     },
-    getUserId() {
-      return this.lanyard?.discord_user?.id || ''
-    },
-    getStatus() {
+
+    getInfo() {
       return {
         statusIndicator: this.lanyard?.discord_status || 'Offline',
-        song: this.lanyard?.spotify?.song,
-        artist: this.lanyard?.spotify?.artist,
-        albumurl: this.lanyard?.spotify?.album_art_url,
+        userId: this.lanyard?.discord_user?.id,
+        userAvatar: this.lanyard?.discord_user?.avatar,
       }
     },
   },
@@ -171,6 +165,5 @@ export default {
       this.lanyard = status
     }
   },
-  methods: {},
 }
 </script>
