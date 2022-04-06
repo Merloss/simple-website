@@ -16,11 +16,22 @@
     xyz="fade small stagger"
   >
     <div
+      class="
+        dark:bg-transparent dark:hover:bg-white/10
+        hover:bg-gray-400
+        transition
+        duration-75
+        rounded-md
+        flex
+        p-3
+        font-semibold
+        text-sm
+        md:text-base
+        xyz-in
+        content-center
+      "
       :class="{
-        'hover:bg-gray-400 transition duration-75 dark:bg-transparent dark:hover:bg-white/10 rounded-md md:p-5 p-3 flex md:flex-col font-semibold md:text-base text-sm content-center xyz-in':
-          spotifyStatus === true,
-        'transition duration-75 rounded-md flex p-3 font-semibold md:text-base text-sm content-center xyz-in':
-          spotifyStatus === false,
+        ' md:p-5 md:flex-col': spotifyStatus === true,
       }"
       :style="
         spotifyStatus === true ? `background-color: ${technology[1]}10` : ''
@@ -30,11 +41,19 @@
       :title="technology[0]"
     >
       <icon
+        class="
+          md:w-auto
+          h-4
+          w-4
+          md:mr-0
+          xl:mr-2
+          mr-2
+          self-center
+          xl:flex-shrink-0
+        "
         :class="{
-          'md:h-16 md:w-auto xl:w-16 h-4 w-4 md:mr-0 xl:mr-2 mr-2 self-center xl:flex-shrink-0':
-            spotifyStatus === true,
-          'md:h-6 md:w-auto xl:w-6 h-4 w-4 md:mr-0 xl:mr-2 mr-2 self-center xl:flex-shrink-0':
-            spotifyStatus === false,
+          'md:h-16  xl:w-16 ': spotifyStatus === true,
+          'md:h-6  xl:w-6': spotifyStatus === false,
         }"
         :name="key"
       />
