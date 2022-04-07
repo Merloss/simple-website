@@ -53,4 +53,5 @@ export default {
   tailwindcss: {
     viewer: false,
   },
+  telemetry: true,
 }
