@@ -80,7 +80,7 @@
                   {{ getStatus.artist }}</span
                 >
                 <span
-                  ><span class="font-thin">on</span> {{ getStatus.album }}</span
+                  ><span class="font-thin">on</span> {{ getStatus.album.large_text }}</span
                 >
               </div>
 
