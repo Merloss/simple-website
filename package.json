@@ -13,7 +13,6 @@
   },
   "devDependencies": {
     "@nuxtjs/color-mode": "^3.1.4",
-    "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/tailwindcss": "^5.3.0",
     "nuxt": "3.0.0-rc.5"
   },

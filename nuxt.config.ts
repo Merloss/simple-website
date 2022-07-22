@@ -4,26 +4,15 @@ import { defineNuxtConfig } from "nuxt";
 export default defineNuxtConfig({
     ssr: false,
     target: "static",
-    modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@nuxtjs/pwa"],
+    modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
     colorMode: { classSuffix: "" },
     meta: {
         title: 'Merloss',
+        description: '19 years old Turkish student, studying in Computer Programming and I try to learn new things every day in order to improve myself.',
         htmlAttrs: {
             lang: 'en',
         },
 
         link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    },
-    pwa: {
-        meta: {
-            title: 'Merloss',
-            description:
-                '19 years old Turkish student, studying in Computer Programming and I try to learn new things every day in order to improve myself.',
-        },
-        manifest: {
-            name: 'Merloss',
-            short_name: 'Merloss',
-            lang: 'en',
-        },
     },
 });
