@@ -1,30 +1,19 @@
 <template>
   <div>
-    <skeleton :class="getClasses" v-if="loading || !imageLoaded" />
-    <img
-      v-show="imageLoaded && !loading"
-      class="xyz-in"
-      xyz="fade"
-      :class="{ invisible: imageLoaded == false, [getClasses]: true }"
-      @load="imageLoaded = true"
-      :src="src"
-      :draggable="draggable"
-    />
+    <skeleton :class="class" v-if="loading || !imageLoaded" />
+    <img v-show="imageLoaded && !loading" class="xyz-in" xyz="fade"
+      :class="{ invisible: imageLoaded == false, [this.class]: true }" @load="imageLoaded = true" :src="src"
+      :draggable="draggable" />
   </div>
 </template>
 <script>
 export default {
   inheritAttrs: false,
-  props: ['src', 'loading', 'draggable'],
+  props: ['src', 'loading', 'draggable', 'class'],
   data() {
     return {
       imageLoaded: false,
     }
-  },
-  computed: {
-    getClasses() {
-      return this.$vnode?.data?.staticClass
-    },
   },
 }
 </script>
@@ -33,6 +22,7 @@ export default {
 .fade-leave-active {
   transition: opacity 0.5s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
