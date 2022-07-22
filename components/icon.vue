@@ -1,12 +1,19 @@
 <template>
-  <!-- eslint-disable-next-line vue/no-v-html -->
-  <svg v-if="name" v-html="require(`../assets/icons/${name}.svg?raw`)" />
+  <component :is="dynamicComponent" />
 </template>
 
 <script>
+import { defineAsyncComponent } from "vue";
 export default {
   props: {
-    name: { type: String, default: 'image' },
+    name: { type: String, default: "image" },
   },
-}
+  computed: {
+    dynamicComponent() {
+      const name = this.name;
+
+      return defineAsyncComponent(() => import(`./icons/${name}.vue`));
+    },
+  },
+};
 </script>
