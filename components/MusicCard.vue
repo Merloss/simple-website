@@ -1,41 +1,39 @@
 <template>
-  <skeleton
-    class="w-[500px] h-48 rounded-md hidden md:block"
-    v-if="getLoading"
-  />
+  <div v-if="getLoading">
+    <div class="md:flex gap-3 hidden">
+      <skeleton class="h-48 w-48 rounded-md" />
+      <div class="gap-8 flex flex-col self-center">
+        <skeleton class="w-24 h-4 rounded-md" />
+        <skeleton class="w-52 h-4 rounded-md" />
+        <skeleton class="w-48 h-4 rounded-md" />
+      </div>
+    </div>
+    <skeleton class="h-4 rounded-md md:hidden w-full my-4" />
+  </div>
+
   <div v-else-if="!getStatus.song" class="text-3xl" />
 
-  <div v-else class="z-0">
-    <div class="md:hidden flex my-2 items-center">
-      <icon name="spotifyGreen" class="text-[#3ba55d] h-6 w-6 md:hidden" />
+  <div v-else>
+    <div class="flex items-center my-4 md:hidden">
+      <icon name="spotifyGreen" class="text-[#3ba55d] h-7 w-7 md:hidden mr-1" />
       <div class="text-xs">
-        <span class="font-semibold"> {{ getStatus.song }} </span
-        ><span class="font-thin">by</span>
+        <span class="font-semibold"> {{ getStatus.song }} </span>
+        <span class="font-thin">&nbsp;by&nbsp;</span>
         <span>{{ getStatus.artist }}</span>
       </div>
     </div>
 
     <div
-      class="
-        rounded-lg
-        font-extralight
-        md:w-auto
-        xyz-in
-        justify-between
-        text-xs
-        md:h-48 md:max-w-xl md:text-md
-        hidden
-        md:block
-      "
+      class="justify-between hidden text-xs rounded-lg font-extralight md:w-auto xyz-in md:h-48 md:max-w-xl md:text-md md:block"
       xyz="fade"
     >
-      <template>
-        <div class="flex flex-col md:h-full pr-4">
-          <div class="flex gap-2 md:w-full items-center truncate">
-            <div class="h-full w-72 hidden md:block">
+      <section>
+        <div class="flex flex-col pr-4 md:h-full">
+          <div class="flex items-center gap-2 truncate md:w-full">
+            <div class="hidden h-full w-72 md:block">
               <div class="flex-shrink-0">
                 <v-image
-                  class="rounded-md h-full"
+                  class="h-full rounded-md"
                   draggable="false"
                   :loading="getLoading"
                   :src="getImageUrl"
@@ -44,169 +42,106 @@
             </div>
 
             <div
-              class="
-                flex flex-col
-                gap-2
-                px-2
-                md:text-xl
-                w-full
-                font-normal
-                truncate
-                overflow-hidden
-              "
+              class="flex flex-col w-full gap-2 px-2 overflow-hidden font-normal truncate md:text-xl"
             >
               <div
-                class="
-                  space-y-1
-                  overflow-hidden
-                  flex
-                  md:flex-col
-                  space-x-4
-                  my-2
-                  md:my-0 md:space-x-0
-                "
+                class="flex my-2 space-x-4 space-y-1 overflow-hidden md:flex-col md:my-0 md:space-x-0 w-72"
               >
                 <div class="truncate">
                   <Link
-                    :href="songForward()"
+                    :href="songForward"
                     target="_blank"
-                    v-tippy="{ content: 'Click to go song' }"
+                    v-tooltip="'Click to go song'"
                     class="font-medium hover:underline md:truncate"
-                    >{{ getStatus.song }}</Link
                   >
+                    {{ getStatus.song }}
+                  </Link>
                 </div>
-                <span class="truncate"
-                  ><span class="font-thin">by</span>
-                  {{ getStatus.artist }}</span
-                >
-                <span
-                  ><span class="font-thin">on</span> {{ getStatus.album.large_text }}</span
-                >
+
+                <span class="truncate">
+                  <span class="font-thin">by</span>
+                  {{ getStatus.artist }}
+                </span>
+
+                <span class="truncate">
+                  <span class="font-thin">on</span> {{ getStatus.album }}
+                </span>
               </div>
 
               <div
-                class="
-                  w-full
-                  mx-auto
-                  rounded-md
-                  h-1
-                  transition-all
-                  dark:bg-white/40
-                  bg-black/20
-                "
+                class="w-full h-1 mx-auto transition-all rounded-md dark:bg-white/40 bg-black/20"
               >
                 <div
-                  class="h-1 rounded-md transition-all dark:bg-white bg-black"
+                  class="h-1 transition-all bg-black rounded-md dark:bg-white"
                   :style="`width: ${progress}%`"
                 ></div>
               </div>
             </div>
           </div>
         </div>
-      </template>
+      </section>
     </div>
   </div>
 </template>
+<script setup lang="ts">
+import tinycolor from "tinycolor2";
+import { useLanyardStore } from "@/store/index";
 
-<script>
-import { prominent } from 'color.js'
-import tinycolor from 'tinycolor2'
-import skeleton from '~/components/skeleton.vue'
+const store = useLanyardStore();
 
-export default {
-  components: { skeleton },
-  data() {
-    return {
-      lanyard: {},
-      dominantColor: '',
-
-      rotate: {
-        rotate: 360,
-        backgroundColor: ['#2f495e', '#00c58e'],
-        duration: 3000,
-      },
-      time: new Date().getTime(),
-    }
+const data = reactive({
+  rotate: {
+    rotate: 360,
+    backgroundColor: ["#2f495e", "#00c58e"],
+    duration: 3000,
   },
-  computed: {
-    getLoading() {
-      return Object.keys(this.lanyard).length === 0
-    },
-    getImageUrl() {
-      if (this.lanyard?.spotify?.album_art_url) {
-        this.$store.commit('lanyard', this.dominantColor)
-      }
+  time: new Date().getTime(),
+});
 
-      return this.lanyard?.spotify?.album_art_url
-    },
-    getTextColor() {
-      return tinycolor(this.dominantColor).isDark()
-    },
+const getLoading = computed(() => {
+  return Object.keys(store?.lanyardData || {}).length === 0;
+});
 
-    getStatus() {
-      return {
-        statusIndicator: this.lanyard?.discord_status || 'Offline',
-        song: this.lanyard?.spotify?.song,
-        artist: this.lanyard?.spotify?.artist,
-        album: this.lanyard?.spotify?.album,
-        albumurl: this.lanyard?.spotify?.album_art_url,
-        trackId: this.lanyard?.spotify?.track_id,
-      }
-    },
-    progress() {
-      const total =
-        this.lanyard?.spotify?.timestamps?.end -
-        this.lanyard?.spotify?.timestamps?.start
-      const progress =
-        100 -
-        (100 * (this.lanyard?.spotify?.timestamps.end - this.time)) / total
+const getImageUrl = computed(() => {
+  if (store?.lanyardData?.spotify?.album_art_url) {
+  }
 
-      return progress
-    },
-  },
+  return store?.lanyardData?.spotify?.album_art_url;
+});
 
-  watch: {
-    lanyard: {
-      deep: true,
-      handler(oldLanyard, newLanyard) {
-        if (
-          oldLanyard?.spotify?.album_art_url !==
-          newLanyard?.spotify?.album_art_url
-        )
-          return this.getColor()
-      },
-    },
-  },
+const getTextColor = computed(() => {
+  return tinycolor(store?.gradientColor).isDark();
+});
 
-  async mounted() {
-    const socket = await this.$lanyard({
-      userId: '489811754411491328',
-      socket: true,
-    })
+const getStatus = computed(() => {
+  return {
+    statusIndicator: store?.lanyardData?.discord_status || "Offline",
+    song: store?.lanyardData?.spotify?.song,
+    artist: store?.lanyardData?.spotify?.artist,
+    album: store?.lanyardData?.spotify?.album,
+    albumurl: store?.lanyardData?.spotify?.album_art_url,
+    trackId: store?.lanyardData?.spotify?.track_id,
+  };
+});
 
-    socket.onmessage = ({ data }) => {
-      const { d: status } = JSON.parse(data)
-      this.lanyard = status
-    }
-    setInterval(() => {
-      this.time = new Date().getTime()
-    }, 500)
-  },
+const progress = computed(() => {
+  const total =
+    store?.lanyardData?.spotify?.timestamps?.end -
+    store?.lanyardData?.spotify?.timestamps?.start;
+  const progress =
+    100 -
+    (100 * (store?.lanyardData?.spotify?.timestamps.end - data.time)) / total;
 
-  methods: {
-    async getColor() {
-      if (!this.lanyard?.spotify?.album_art_url) return
+  return progress;
+});
 
-      const color = await prominent(this.lanyard?.spotify?.album_art_url, {
-        format: 'hex',
-        amount: 1,
-      })
+const songForward = computed(() => {
+  return `https://open.spotify.com/track/${getStatus?.value.trackId}`;
+});
 
-      this.dominantColor = color
-    },
-    songForward() {
-      return `https://open.spotify.com/track/${this.getStatus.trackId}`
-    },
-  },
-}
+onMounted(() => {
+  setInterval(() => {
+    data.time = new Date().getTime();
+  }, 500);
+});
 </script>
