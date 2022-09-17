@@ -12,17 +12,18 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "@nuxtjs/color-mode": "^3.1.4",
-    "@nuxtjs/tailwindcss": "^5.3.0",
-    "nuxt": "3.0.0-rc.5"
+    "@nuxtjs/color-mode": "^3.1.5",
+    "@nuxtjs/tailwindcss": "^5.3.3",
+    "nuxt": "3.0.0-rc.5",
+    "postcss-custom-properties": "^12.1.9"
   },
   "dependencies": {
-    "@animxyz/vue": "^0.6.6",
+    "@animxyz/vue": "^0.6.7",
     "@leonardssh/use-lanyard": "^1.0.4",
     "@nuxtjs/svg": "^0.4.0",
     "color.js": "^1.2.0",
-    "floating-vue": "^2.0.0-beta.17",
-    "pinia": "^2.0.16",
+    "floating-vue": "^2.0.0-beta.20",
+    "pinia": "^2.0.22",
     "tinycolor2": "^1.4.2"
   }
 }
