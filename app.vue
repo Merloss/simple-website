@@ -112,12 +112,6 @@ import { socials } from "@/utils/composables/socials";
 let store = useLanyardStore();
 const colorMode = useColorMode();
 
-useHead({
-  htmlAttrs: {
-    class: colorMode.preference,
-  },
-});
-
 const switchTheme = () => {
   colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
 };
@@ -151,16 +145,43 @@ const getInfo = computed(() => ({
   userAvatar: store?.lanyardData?.discord_user?.avatar,
 }));
 
-useSeoMeta({
-  title: "Merloss",
-  ogTitle: "Merloss's website",
-  description: `${
-    new Date().getFullYear() - 2002
-  } years old Turkish student, studying in Computer Programming and I try to learn new things every day in order to improve myself.`,
-  ogDescription: `${
-    new Date().getFullYear() - 2002
-  } years old Turkish student, studying in Computer Programming and I try to learn new things every day in order to improve myself.`,
-  ogImage: `https://cdn.discordapp.com/avatars/${getInfo.value.userId}/${getInfo.value.userAvatar}.png?size=1024`,
-  twitterCard: "summary_large_image",
+useHead({
+  htmlAttrs: {
+    class: colorMode.preference,
+  },
+  meta: [
+    { property: "og:title", content: "Merloss's website" },
+    { property: "og:type", content: "website" },
+    { property: "og:url", content: window.location.host },
+    {
+      property: "og:description",
+      content: `${
+        new Date().getFullYear() - 2002
+      } years old Turkish student, studying in Computer Programming and I try to learn new things every day in order to improve myself.`,
+    },
+    {
+      property: "og:image",
+      content: `https://cdn.discordapp.com/avatars/${getInfo?.value?.userId}/${getInfo?.value?.userAvatar}.png?size=1024`,
+    },
+    //
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+    {
+      name: "twitter:title",
+      content: "Merloss's website",
+    },
+    {
+      name: "twitter:description",
+      content: `${
+        new Date().getFullYear() - 2002
+      } years old Turkish student, studying in Computer Programming and I try to learn new things every day in order to improve myself.`,
+    },
+    {
+      name: "twitter:image",
+      content: `https://cdn.discordapp.com/avatars/${getInfo?.value?.userId}/${getInfo?.value?.userAvatar}.png?size=1024`,
+    },
+  ],
 });
 </script>
