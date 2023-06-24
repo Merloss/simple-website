@@ -15,7 +15,7 @@
 
   <div v-else>
     <div class="flex items-center my-4 md:hidden">
-      <icon name="spotifyGreen" class="text-[#3ba55d] h-7 w-7 md:hidden mr-1" />
+      <icon name="mdi:spotify" class="text-[#3ba55d] h-7 w-7 md:hidden mr-1" />
       <div class="text-xs">
         <span class="font-semibold"> {{ getStatus.song }} </span>
         <span class="font-thin">&nbsp;by&nbsp;</span>
@@ -36,7 +36,7 @@
                   class="h-full rounded-md"
                   draggable="false"
                   :loading="getLoading"
-                  :src="getImageUrl"
+                  :src="store?.lanyardData?.spotify?.album_art_url"
                 />
               </div>
             </div>
@@ -49,7 +49,7 @@
               >
                 <div class="truncate">
                   <Link
-                    :href="songForward"
+                    :href="`https://open.spotify.com/track/${getStatus?.trackId}`"
                     target="_blank"
                     v-tooltip="'Click to go song'"
                     class="font-medium hover:underline md:truncate"
@@ -84,7 +84,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import tinycolor from "tinycolor2";
+import Link from "@/components/link.vue";
 import { useLanyardStore } from "@/store/index";
 
 const store = useLanyardStore();
@@ -98,20 +98,9 @@ const data = reactive({
   time: new Date().getTime(),
 });
 
-const getLoading = computed(() => {
-  return Object.keys(store?.lanyardData || {}).length === 0;
-});
-
-const getImageUrl = computed(() => {
-  if (store?.lanyardData?.spotify?.album_art_url) {
-  }
-
-  return store?.lanyardData?.spotify?.album_art_url;
-});
-
-const getTextColor = computed(() => {
-  return tinycolor(store?.gradientColor).isDark();
-});
+const getLoading = computed(
+  () => Object.keys(store?.lanyardData || {}).length === 0
+);
 
 const getStatus = computed(() => {
   return {
@@ -125,18 +114,16 @@ const getStatus = computed(() => {
 });
 
 const progress = computed(() => {
-  const total =
-    store?.lanyardData?.spotify?.timestamps?.end -
-    store?.lanyardData?.spotify?.timestamps?.start;
-  const progress =
-    100 -
-    (100 * (store?.lanyardData?.spotify?.timestamps.end - data.time)) / total;
+  if (store?.lanyardData?.spotify?.timestamps.end) {
+    const total =
+      store?.lanyardData?.spotify?.timestamps?.end -
+      store?.lanyardData?.spotify?.timestamps?.start;
+    const progress =
+      100 -
+      (100 * (store?.lanyardData?.spotify?.timestamps.end - data.time)) / total;
 
-  return progress;
-});
-
-const songForward = computed(() => {
-  return `https://open.spotify.com/track/${getStatus?.value.trackId}`;
+    return progress;
+  }
 });
 
 onMounted(() => {
