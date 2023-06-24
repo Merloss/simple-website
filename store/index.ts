@@ -3,13 +3,13 @@ import type { LanyardData } from "@leonardssh/use-lanyard";
 
 export const useLanyardStore = defineStore("lanyard", {
   state: () =>
-  ({
-    lanyardData: {},
-    gradientColor: "",
-  } as {
-    lanyardData: LanyardData;
-    gradientColor: string;
-  }),
+    ({
+      lanyardData: {},
+      gradientColor: "",
+    } as {
+      lanyardData: LanyardData;
+      gradientColor: string;
+    }),
 
   actions: {
     setData(lanyard: LanyardData) {
