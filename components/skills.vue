@@ -9,44 +9,32 @@
         ' md:p-5 md:flex-col': spotifyStatus === true,
       }"
       :style="
-        spotifyStatus === true ? `background-color: ${technology[1]}10` : ''
+        spotifyStatus === true ? `background-color: ${technology.color}10` : ''
       "
-      v-for="(technology, key) in technologies"
-      :key="technology"
-      :title="technology[0]"
+      v-for="(technology, key) in techStack"
+      :key="key"
+      :title="technology.name"
     >
-      <icon
-        class="self-center w-4 h-4 mr-2 md:w-auto md:mr-0 xl:mr-2 xl:flex-shrink-0"
+      <Icon
+        class="self-center w-6 h-6 md:w-auto mr-2 xl:flex-shrink-0"
         :class="{
-          'md:h-16  xl:w-16 ': spotifyStatus === true,
-          'md:h-6  xl:w-6': spotifyStatus === false,
+          'md:h-16 xl:w-16 md:mr-0': spotifyStatus === true,
+          'md:h-8 xl:w-8': spotifyStatus === false,
         }"
-        :name="key"
+        :name="technology.icon"
       />
-      <span class="self-center md:hidden xl:block">
-        {{ technology[0] }}
-      </span>
+      <Link
+        :href="technology.url"
+        class="self-center md:hidden xl:block hover:underline"
+      >
+        {{ technology.name }}
+      </Link>
     </div>
   </section>
 </template>
 
-<script>
-export default {
-  props: ["spotifyStatus"],
-  data() {
-    return {
-      technologies: {
-        javascript: ["JavaScript", "#f7df1e"],
-        python: ["Python", "#3572A5"],
-        html: ["HTML5", "#E34F26"],
-        css: ["CSS3", "#3faede"],
-        tailwind: ["TailwindCSS", "#2FA7FF"],
-        nuxt: ["NuxtJS", "#00dc82"],
-        vue: ["VueJS", "#41B883"],
-        nodejs: ["NodeJS", "#0F9D58"],
-        firebase: ["Firebase", "#FFC107"],
-      },
-    };
-  },
-};
+<script setup lang="ts">
+import Link from "@/components/link.vue";
+import { techStack } from "@/utils/composables/techStack";
+const { spotifyStatus } = defineProps(["spotifyStatus"]);
 </script>
