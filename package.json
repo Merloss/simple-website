@@ -5,26 +5,28 @@
     "email": "merl0ss@hotmail.com"
   },
   "private": true,
-   "scripts": {
-    "dev": "nuxi dev",
-    "build": "nuxi build",
-    "start": "node .output/server/index.mjs",
-    "preview": "nuxi preview",
-    "updateall": "yarn upgrade-interactive --latest"
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxtjs/color-mode": "^3.1.5",
-    "@nuxtjs/tailwindcss": "^5.3.3",
-    "nuxt": "3.4.3",
-    "postcss-custom-properties": "^12.1.9"
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/color-mode": "^3.3.0",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@types/node": "^18",
+    "nuxt": "^3.6.0",
+    "typescript": "latest"
   },
   "dependencies": {
     "@animxyz/vue": "^0.6.7",
     "@leonardssh/use-lanyard": "^1.0.4",
-    "@nuxtjs/svg": "^0.4.0",
+    "@pinia/nuxt": "^0.4.11",
     "color.js": "^1.2.0",
-    "floating-vue": "^2.0.0-beta.20",
-    "pinia": "^2.0.22",
-    "tinycolor2": "^1.4.2"
+    "floating-vue": "^2.0.0-beta.22",
+    "nuxt-icon": "^0.4.1",
+    "pinia": "^2.1.4"
   }
 }
