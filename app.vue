@@ -8,6 +8,7 @@
     "
   >
     <button
+      name="theme"
       @click="switchTheme"
       class="flex items-center p-2 transition duration-150 bg-gray-300 dark:bg-gray-900 text-gray-500 rounded-md focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 absolute top-3 right-3"
     >
@@ -148,8 +149,18 @@ const getInfo = computed(() => ({
 useHead({
   htmlAttrs: {
     class: colorMode.preference,
+    lang: "en",
   },
+  title: "Merloss",
+
   meta: [
+    {
+      name: "description",
+      content: `${
+        new Date().getFullYear() - 2002
+      } years old Turkish student, studying in Computer Programming and I try to learn new things every day in order to improve myself.`,
+    },
+    { name: "theme-color", content: "#000000" },
     { property: "og:title", content: "Merloss's website" },
     { property: "og:type", content: "website" },
     { property: "og:url", content: window.location.host },
