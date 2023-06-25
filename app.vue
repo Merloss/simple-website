@@ -70,6 +70,7 @@
                 v-for="(item, index) in socials"
                 :key="index"
                 :href="item.url"
+                :aria-label="item.name"
               >
                 <Icon
                   :name="item.icon"
