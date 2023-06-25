@@ -9,6 +9,7 @@
   >
     <button
       name="theme"
+      aria-label="theme icon"
       @click="switchTheme"
       class="flex items-center p-2 transition duration-150 bg-gray-300 dark:bg-gray-900 text-gray-500 rounded-md focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 absolute top-3 right-3"
     >
