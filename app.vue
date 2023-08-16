@@ -1,12 +1,17 @@
 <template>
   <main
-    class="bg-gray-200 dark:bg-[#070510] dark:text-white overflow-hidden transition duration-75 dark:selection:bg-white/10 selection:bg-black/10"
-    :style="
-      colorMode.value == 'dark'
-        ? `background-image: linear-gradient(to top left, #00000000,#00000000, ${store?.gradientColor}40);`
-        : ''
-    "
+    class="bg-gray-200 dark:bg-[#070510] relative dark:text-white overflow-hidden transition duration-75 dark:selection:bg-white/10 selection:bg-black/10"
   >
+    <div
+      class="h-[2000px] blur-[100px] w-[200%] xyz-in absolute bg-contain"
+      xyz="fade"
+      :key="store?.lanyardData.spotify?.album_art_url"
+      :style="
+        colorMode.value == 'dark'
+          ? `background-image: url('${store?.lanyardData.spotify?.album_art_url}'); opacity: 40%; animation-name: spin; animation-iteration-count: infinite; animation-duration: 85s; animation-timing-function: linear;`
+          : ''
+      "
+    />
     <button
       name="theme"
       aria-label="theme icon"
