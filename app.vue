@@ -112,7 +112,6 @@
 
 <script setup lang="ts">
 import Link from "@/components/link.vue";
-import { prominent } from "color.js";
 import { useLanyard } from "@leonardssh/use-lanyard";
 import { useLanyardStore } from "@/store";
 import { socials } from "@/utils/composables/socials";
@@ -129,15 +128,6 @@ useLanyard({
   socket: true,
   async onPresenceUpdate(presence) {
     store?.setData(presence);
-
-    if (!presence?.spotify?.album_art_url) return;
-
-    const color = await prominent(presence?.spotify?.album_art_url, {
-      format: "hex",
-      amount: 1,
-    });
-
-    store?.setGradientColor(color?.toString());
   },
 });
 
