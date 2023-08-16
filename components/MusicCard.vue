@@ -33,10 +33,12 @@
             <div class="hidden h-full w-72 md:block">
               <div class="flex-shrink-0">
                 <v-image
-                  class="h-full rounded-md"
+                  class="h-full rounded-md xyz-in"
                   draggable="false"
                   :loading="getLoading"
                   :src="store?.lanyardData?.spotify?.album_art_url"
+                  :key="store?.lanyardData?.spotify?.album_art_url"
+                  xyz="fade"
                 />
               </div>
             </div>
@@ -47,7 +49,7 @@
               <div
                 class="flex my-2 space-x-4 space-y-1 overflow-hidden md:flex-col md:my-0 md:space-x-0 w-72"
               >
-                <div class="truncate">
+                <div class="truncate xyz-in" xyz="fade" :key="getStatus.song">
                   <Link
                     :href="`https://open.spotify.com/track/${getStatus?.trackId}`"
                     target="_blank"
@@ -60,11 +62,20 @@
 
                 <span class="truncate">
                   <span class="font-thin">by</span>
-                  {{ getStatus.artist }}
+                  <span
+                    class="xyz-in ml-1.5"
+                    xyz="fade"
+                    :key="getStatus.artist"
+                  >
+                    {{ getStatus.artist }}
+                  </span>
                 </span>
 
                 <span class="truncate">
-                  <span class="font-thin">on</span> {{ getStatus.album }}
+                  <span class="font-thin">on</span>
+                  <span class="xyz-in ml-1.5" xyz="fade" :key="getStatus.album">
+                    {{ getStatus.album }}
+                  </span>
                 </span>
               </div>
 
@@ -89,14 +100,7 @@ import { useLanyardStore } from "@/store/index";
 
 const store = useLanyardStore();
 
-const data = reactive({
-  rotate: {
-    rotate: 360,
-    backgroundColor: ["#2f495e", "#00c58e"],
-    duration: 3000,
-  },
-  time: new Date().getTime(),
-});
+const time = ref(new Date().getTime());
 
 const getLoading = computed(
   () => Object.keys(store?.lanyardData || {}).length === 0
@@ -120,7 +124,8 @@ const progress = computed(() => {
       store?.lanyardData?.spotify?.timestamps?.start;
     const progress =
       100 -
-      (100 * (store?.lanyardData?.spotify?.timestamps.end - data.time)) / total;
+      (100 * (store?.lanyardData?.spotify?.timestamps.end - time.value)) /
+        total;
 
     return progress;
   }
@@ -128,7 +133,7 @@ const progress = computed(() => {
 
 onMounted(() => {
   setInterval(() => {
-    data.time = new Date().getTime();
+    time.value = new Date().getTime();
   }, 500);
 });
 </script>
