@@ -6,10 +6,10 @@ export const techStack = [
     url: "https://www.javascript.com/",
   },
   {
-    icon: "vscode-icons:file-type-python",
-    color: "#3572A5",
-    name: "Python",
-    url: "https://www.python.org/",
+    icon: "vscode-icons:file-type-go",
+    color: "#79d4fd",
+    name: "Go",
+    url: "https://go.dev/",
   },
   {
     icon: "vscode-icons:file-type-html",
