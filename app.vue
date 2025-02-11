@@ -65,9 +65,7 @@
               class="w-full md:w-7/12 text-md opacity-80 md:text-lg xyz-in"
               xyz="fade left-4"
             >
-              {{ new Date().getUTCFullYear() - 2002 }} years old Turkish
-              student, studying in Computer Programming and I try to learn new
-              things every day in order to improve myself.
+              Joking & Coding
             </p>
 
             <p class="mt-4 md:text-xl xyz-in" xyz="fade left-4">Socials</p>
